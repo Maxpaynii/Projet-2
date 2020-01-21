@@ -1,0 +1,42 @@
+.Modal{
+    display: block;
+    position: fixed;
+    z-index: 1 ;
+    left: 0;
+    top:0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); //couleur de fond arriere plam
+
+}
+.ContenuModal{
+    background-color: aliceblue; //couleur du modal
+    margin: 10% auto; // position par rapport a la longueur
+    padding: 40px; // aire du modal
+    width: 85%; //position par rapport a la largeur
+}
+.contenuGuide{
+    display: none;
+    position: fixed ;
+    overflow: scroll;
+    background-color: rgb(236, 184, 184); //couleur du modal
+    margin: auto; // position par rapport a la longueur
+    padding: 50px; // aire du guide
+    width: 75%; //position par rapport a la largeur
+    height: 30%;
+}
+
+p {
+    font-size: 15;
+    margin-block-end: 15px;
+}
+
+h2 {
+    margin-block-end: 10px;
+}
+
+h5 {
+    font-size: 20;
+    margin-block-end: -5px;
+}

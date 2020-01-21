@@ -1,0 +1,38 @@
+<button [ngClass]="principaleOptions ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="ouvrirPalette('primaire')">Couleur primaire</button>
+<button [ngClass]="secondaireOptions ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="ouvrirPalette('secondaire')">Couleur secondaire</button>
+<button (click)="intervertirCouleur()">Intervertir couleurs</button>
+
+<svg class = "historiqueCouleur" width= "170"  height = "150">
+    <!--couleur 1 et couleur 2-->
+    <rect x="20" y="10"  width="30" height="20" stroke="black" attr.fill="{{couleurP}}"  stroke-width="2" (mousedown)="ouvrirPalette('primaire')"></rect>
+    <rect x="100" y="10" width="30" height="20" stroke="white" attr.fill="{{couleurS}}"  stroke-width="2" (mousedown)="ouvrirPalette('secondaire')"></rect>
+    <!--tableau des 10 derniers couleurs-->
+    <rect x="10" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[0]}}"  stroke-width="1" (mousedown)="setCoul(0)" ></rect>
+    <rect x="25" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[1]}}"  stroke-width="1" (mousedown)="setCoul(1)"></rect>
+    <rect x="40" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[2]}}"  stroke-width="1" (mousedown)="setCoul(2)"></rect>
+    <rect x="55" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[3]}}"  stroke-width="1" (mousedown)="setCoul(3)"></rect>
+    <rect x="70" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[4]}}"  stroke-width="1" (mousedown)="setCoul(4)"></rect>
+    <rect x="85" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[5]}}"  stroke-width="1" (mousedown)="setCoul(5)"></rect>
+    <rect x="100" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[6]}}"  stroke-width="1" (mousedown)="setCoul(6)"></rect>
+    <rect x="115" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[7]}}"  stroke-width="1" (mousedown)="setCoul(7)"></rect>
+    <rect x="130" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[8]}}"  stroke-width="1" (mousedown)="setCoul(8)"></rect>
+    <rect x="145" y="50" width="15" height="20" stroke="white" attr.fill="{{TableauCouleurs[9]}}"  stroke-width="1" (mousedown)="setCoul(9)"></rect>
+</svg>
+
+
+<div class ="paletteCouleur" #paletteCouleur>
+    <div class="color-wrapper">
+        <app-transparence-couleur [transparence]="transparence" (couleur)="couleur = $event"></app-transparence-couleur>
+        <app-table-couleur (couleur)="transparence=$event" style="margin-left:16px"></app-table-couleur>
+    </div>
+    <div class="color-div" [ngStyle]="{'background-color': couleur || 'white'}"></div>
+    <input type="range" [(ngModel)]="transparenceCouleur" min="1" max="255" value="255" id="myRange">
+    <input type="text" [(ngModel)]="couleurComplete" style="width: 75px;" required pattern="#[0-9A-Fa-f]{8}" #validCouleur="ngModel">
+    <div *ngIf="!validCouleur.errors?.pattern && couleur !== ''"> 
+        <button (click)="setCouleur()">ok</button>
+    </div>
+    <button (click)="fermer()">annuler</button>
+</div>
+<div *ngIf="validCouleur.errors?.pattern && couleur === ''"> 
+    Couleur invalide
+</div> 

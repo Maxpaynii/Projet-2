@@ -1,0 +1,47 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 200px 100px auto 50px;
+    grid-template-rows: auto auto auto;
+}
+
+.grid-item {
+    background-color: lightblue;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    font-size: 15px;
+    text-align: justify, center;
+}
+
+.grid-item-svg {
+    background-color: lightblue;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 5px;
+    height: 100px !important;
+    width: auto;
+}
+
+.etiquette-container {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.etiquette-container:hover{
+    background-color: #777;
+}
+
+.scroll {
+    overflow: auto;
+    height: auto;
+    width: auto;
+}
+
+.supprimer {
+    padding: 10px;
+    text-align: center;
+}

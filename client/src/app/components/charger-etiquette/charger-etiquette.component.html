@@ -1,0 +1,39 @@
+<div class="scroll">
+    <p>Gallerie d'images</p>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <input type="text" matInput formControlName="recherche" [(ngModel)]="recherche" (keyup)="validationRecherche()" placeholder="Recherche Par titre">
+            <mat-error>
+                Veuillez ne pas entrer de virgule.
+            </mat-error>
+        </mat-form-field>
+    </form>
+    <div class="etiquette-container" *ngFor="let etiquette of etiquettes" (click)="setEtiquetteSelectionne(etiquette)">
+        {{etiquette}}
+    </div>
+    <p>Etiquettes Selectionnees
+        <div *ngFor="let etiquetteSelectionne of etiquettesSelectionnees">
+            {{etiquetteSelectionne}}
+        </div>
+    <div class="grid-container" *ngFor="let image of imagesVisible | slice:0:8">
+        <div class="grid-item" (click)="chargementImage(image)">
+            {{image.titre}}
+        </div>
+        <div class="grid-item" (click)="chargementImage(image)">
+            {{image.etiquette}} 
+        </div>
+        <div class="grid-item" (click)="chargementImage(image)">
+            {{image.date}}
+        </div>
+        <div class="grid-item-svg" [innerHTML]="image.svg" (click)="chargementImage(image)">
+        </div>
+        <div class="supprimer">
+            <button class="supprimer" (click)="supprimerImage(image)">Supprimer</button>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="annulation()">Cancel</button>
+        <input type="file" value="Selectionner un fichier" accept=".svg" (change)="chargementLocal($event)">
+        <button [disabled]="!boutonLocal"(click)="chargementLocalConfirmation()">Local</button>
+    </div>
+</div>

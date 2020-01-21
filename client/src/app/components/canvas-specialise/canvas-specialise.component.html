@@ -1,0 +1,30 @@
+
+<div #vuedessin>
+    <svg #svg attr.width.px="{{largeur}}" attr.height.px="{{hauteur}}" attr.viewBox="0 0 {{largeur}} {{hauteur}}" style="border:solid;">
+        <defs>
+        <pattern id="smallGrid" [attr.width.px]="tailleGrille" [attr.height.px]="tailleGrille" patternUnits="userSpaceOnUse">
+        <path attr.d="M {{tailleGrille}} 0 L 0 0 0 {{tailleGrille}}" fill="none" stroke="black" attr.stroke-width="{{transparenceGrille}}"/>
+        </pattern>
+    </defs>
+    <rect width="100%" height="100%"  attr.fill = "{{couleur}}"/>
+    <rect width="100%" height="100%"  fill ="url(#smallGrid)" id = grille/> 
+    <g #traces *ngFor = 'let path of crayon.traces'>
+        <path class = 'trace' [attr.d]="path.instr" [attr.stroke-dasharray]="path.pointille"
+        [attr.stroke]="path.couleurS" [attr.fill]="path.couleurP" [attr.stroke-width] = "path.epaisseur" stroke-linecap="round">  </path> 
+        <script src="canvas-specialise.component.ts"></script>
+    </g>
+    <g *ngFor = 'let rect of selection.boitesEnglobantes'>
+        <path class = 'boite' [attr.d]="rect.instr" [attr.stroke-dasharray]="rect.pointille"
+        [attr.stroke]="rect.couleurS" [attr.fill]="rect.couleurP" [attr.stroke-width] = "rect.epaisseur" stroke-linecap="round"> </path>
+    </g>
+    <text #vraiText>
+        <tspan #vraiTspan
+            fill ="black" attr.font-family = "{{policeText}}"
+            attr.text-anchor ="{{aligneText}}" attr.font-size="{{tailleText}}" 
+            attr.font-weight = "{{grasSVG}}" attr.font-style ="{{italic}}"
+        >
+            <tspan attr.x="{{x}}" attr.y ="{{y}}"> </tspan>
+        </tspan>
+    </text>
+    </svg>
+</div>

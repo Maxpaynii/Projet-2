@@ -1,0 +1,231 @@
+<div *ngIf="vueModal">
+    <app-page-modal></app-page-modal>
+</div>
+
+<div class="titre">
+    <p>PolyDessin 11</p>
+</div>
+
+<ul>
+    <div class= "column_outils">
+        <div class="groupementOutil">
+                <img src="../../../assets/icones/creer-dessin.png" (click)="verification('Formulaire')" title="Créer un nouveau dessin (Ctrl + O)">
+            <img src="../../../assets/icones/ouvrir.png" (click)="verification('Charger')" title="Voir la galerie des dessins (Ctrl + G)">
+            <img src="../../../assets/icones/sauvegarder.png" (click)="verification('Sauvegarder')" title="Sauvegarder le dessin courant (Ctrl + S)">
+        </div>
+        <div class="groupementOutil">
+                <img [ngClass]="OutilAnnulerDiponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/annuler.png" (click)="annulRefait.annuler()" title="Annuler (Ctrl + Z)">
+                <img [ngClass]="OutilRefaireDiponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/refaire.png" (click)="annulRefait.refaire()" title="Refaire (Ctrl + Shift + Z)">
+        </div>
+        <div class="groupementOutil">
+            <img [ngClass]="selectionOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/selection.png" (click)="ouvrirColonneOptions('Selection')" title="Sélection (S)">
+                <img [ngClass]="pressePapierDisponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/supprimer.png" (click)="pressePapier.supprimer()" title="Supprimer (Del)">
+                <img [ngClass]="pressePapierDisponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/copier.png" (click)="pressePapier.copier()" title="Copier (Ctrl + C)">
+                <img [ngClass]="pressePapierDisponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/dupliquer.png" (click)="pressePapier.dupliquer()" title="Dupliquer (Ctrl + D)">
+                <img [ngClass]="pressePapierDisponible() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/couper.png" (click)="pressePapier.couper()" title="Couper (Ctrl + X)">
+                <img [ngClass]="pressePapier.estVide() ? 'outilNonDisponible' : 'outilDisponible'" src="../../../assets/icones/coller.png" (click)="pressePapier.coller()" title="Coller (Ctrl + V)">
+        </div>
+        <div class="groupementOutil">
+            <img [ngClass]="grilleOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/grille.png" (click)="ouvrirColonneOptions('Grille')" title="Grille (G)">
+            <img [ngClass]="magnetismeOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/magnetisme.png" (click)="ouvrirColonneOptions('Magnetisme')" title="Crayon (C)">
+        </div>
+        <div class="groupementOutil">
+            <img [ngClass]="crayonOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/crayon.png" (click)="ouvrirColonneOptions('Crayon')" title="Crayon (C)">
+            <img [ngClass]="plumeOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/plume.png" (click)="ouvrirColonneOptions('Plume')" title="Plume (P)">
+            <img [ngClass]="pipetteOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/pipette.png" (click)="ouvrirColonneOptions('Pipette')" title="Pipette (I)">
+            <img [ngClass]="effaceOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/efface.png" (click)="ouvrirColonneOptions('Efface')" title="Efface (E)">
+            <img [ngClass]="ellipseOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/ellipse.png" (click)="ouvrirColonneOptions('Ellipse')" title="Ellipse (2)">
+            <img [ngClass]="etampeOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/etampe.png" (click)="ouvrirColonneOptions('Etampe')" title="Étampe">
+            <img [ngClass]="aerosolOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/aerosol.png" (click)="ouvrirColonneOptions('Aerosol')" title="Aérosol (A)">
+            <img [ngClass]="applicateurOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/application-couleur.png" (click)="ouvrirColonneOptions('Applicateur')" title="Applicateur de couleur (R)">
+            <img [ngClass]="textOptions ? 'outilActif' : 'outilInactif'" src="../../../assets/icones/texte.png" (click)="ouvrirColonneOptions('Texte')" title="Texte (T)">
+        </div>
+    </div>
+</ul>
+
+<div class="column_options">
+   <div class= "option-scroll">
+        <div *ngIf="defaut">
+            <p class="outilTexte">
+                Veuillez selectionner un outil
+            </p>
+        </div>
+
+        <div *ngIf="crayonOptions">
+            <p class="outilTexte">
+                Crayon
+            </p>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Épaisseur</p>
+                <p class="erreur-parametre" *ngIf="epaisseurCrayon <= 0">Erreur: épaisseur nulle ou négative</p>
+                <input type="number" min=1 max=15  [(ngModel)]="epaisseurCrayon"> 
+            </div>
+        </div>
+
+        <div *ngIf="pipetteOptions">
+            <p class="outilTexte">
+                Pipette
+            </p>
+        </div>
+
+        <div *ngIf="textOptions">
+            <p class="outilTexte">
+                Texte
+            </p>
+            <app-text></app-text>
+        </div>
+
+    <div *ngIf="grilleOptions">
+        <p class="outilTexte">Grille</p>
+        <app-grille></app-grille>
+        <div class = "parametreOutil">
+            <p class = "parametreOutilTexte">Taille des carrés</p>
+            <input type="number" id="pix" min=1 [(ngModel)]="tailleGrille" required>
+            <button (click)="appliquerGrille()">appliquer</button>
+        </div>
+    </div>
+
+    <div *ngIf="magnetismeOptions">
+        <p class="outilTexte">Magnetisme</p>
+        <div class="parametreOutil">
+            <button (click)="activerMagnetisme()">activer</button>
+            <button (click)="desActiverMagnetisme()">desactiver</button>
+        </div>
+        <div class="parametreOutil">
+            <p class="parametreOutilTexte">Point pour ancrage</p>
+            <p class="descriptionParametreTexte">0 pour point haut Gauche</p>
+            <p class="descriptionParametreTexte">1 pour point haut milieu</p>
+            <p class="descriptionParametreTexte">2 pour  point haut Droite</p>
+            <p class="descriptionParametreTexte">3 pour point milieu Droite</p>
+            <p class="descriptionParametreTexte">4 pour  point bas Droite</p> 
+            <p class="descriptionParametreTexte">5 pour point bas milieu</p>
+            <p class="descriptionParametreTexte">6 pour  point bas Gauche</p> 
+            <p class="descriptionParametreTexte">7 pour  point milieu Gauche</p>
+            <p class="descriptionParametreTexte">8 pour  point Milieu</p>    
+            <input type="number" min=0 max= 8  [(ngModel)]="pointChoisi" required>
+            <button (click)="appliquer()">appliquer</button>
+        </div>
+    </div>
+           
+    <div *ngIf="selectionOptions">
+        <p class="outilTexte">
+            Sélection
+        </p>
+    </div>
+
+        <div *ngIf="applicateurOptions">
+            <p class="outilTexte">
+                Application de couleur
+            </p>
+        </div>
+
+        <div *ngIf="ellipseOptions">
+            <p class="outilTexte">
+                Éllipse
+            </p>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Épaisseur</p>
+                <p class="erreur-parametre" *ngIf="epaisseurEllipse <= 0">Erreur: épaisseur nulle ou négative</p>
+                <input type="number" min = 1 max = 20  [(ngModel)]="epaisseurEllipse">
+            </div>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Type tracé</p>
+                <p class="erreur-parametre" *ngIf="!remplissageEllipse && !contourEllipse">Erreur: contour et remplissage désactivés</p>
+                <button [ngClass]="remplissageEllipse ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="remplissageEllipse = !remplissageEllipse">Remplissage</button>
+                <button [ngClass]="contourEllipse ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="contourEllipse = !contourEllipse">Contour</button>
+            </div>           
+        </div>
+
+        <div *ngIf="etampeOptions">
+            <p class="outilTexte">
+                Étampe
+            </p>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Texture</p>
+                <button [ngClass]="textureEtampe === 'hashtag' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="textureEtampe = 'hashtag'">Dièse</button>
+                <button [ngClass]="textureEtampe === 'diamant' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="textureEtampe = 'diamant'">Diamant</button>
+                <button [ngClass]="textureEtampe === 'maison' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="textureEtampe = 'maison'">Maison</button>
+                <button [ngClass]="textureEtampe === 'lettre' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="textureEtampe = 'lettre'">Lettre</button>
+                <button [ngClass]="textureEtampe === 'crayon' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="textureEtampe = 'crayon'">Crayon</button>
+            </div>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Facteur mise à échelle</p>
+                <p class="erreur-parametre" *ngIf="facteurMiseAEchelle <= 0">Erreur: facteur de redimensionnement nul ou négatif</p>
+                <input type="number" min=0 max= 100  [(ngModel)]="facteurMiseAEchelle"> 
+            </div>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Angle de rotation (degrés)</p>
+                <p class="erreur-parametre" *ngIf="angleEtampe < 0">Erreur: Angle de rotation négatif</p>
+                <p class="erreur-parametre" *ngIf="angleEtampe > 360">Erreur: Angle de rotation supérieur à 360 degrés</p>
+                <input type="number" min=0 max= 360  [(ngModel)]="angleEtampe">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="aerosolOptions">
+        <p class="outilTexte">
+            Aerosol
+        </p>
+        <div class="parametreOutil">
+            <p class="parametreOutilTexte">Diamètre</p>
+            <input type="number" min=1 max=50 pattern="^[0-9]{1,2}$" [(ngModel)]="diametreAerosol" (keyup)="verificationAerosol(diametreAerosol, true)">
+        </div>
+        <div class="parametreOutil">
+            <p class="parametreOutilTexte">Nombre d'émission par seconde</p>
+            <input type="number" min=1 max=10 pattern="^[0-9]{1,2}$" [(ngModel)]="emissionAerosol"(keyup)="verificationAerosol(emissionAerosol, false)">
+        </div>
+    </div>
+        <div *ngIf="plumeOptions">
+            <p class="outilTexte">
+                Plume
+            </p>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Épaisseur</p>
+                <p class="erreur-parametre" *ngIf="epaisseurPlume <= 0">Erreur: épaisseur nulle ou négative</p>
+                <input type="number" min=1 max= 100  [(ngModel)]="epaisseurPlume">
+            </div>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Angle de rotation</p>
+                <p class="erreur-parametre" *ngIf="anglePlume < 0">Erreur: Angle de rotation négatif</p>
+                <p class="erreur-parametre" *ngIf="anglePlume > 360">Erreur: Angle de rotation supérieur à 360 degrés</p>
+                <input type="number" min=0 max= 360  [(ngModel)]="anglePlume">
+            </div>
+        </div>
+
+        <div *ngIf="effaceOptions">
+            <p class="outilTexte">
+                Efface
+            </p>
+            <div class="parametreOutil">
+                <p class="parametreOutilTexte">Taille de l'efface</p>
+                <p class="erreur-parametre" *ngIf="epaisseurEfface <= 0">Erreur: épaisseur nulle ou négative</p>
+                <input type="number" min=1 max=100  [(ngModel)]="epaisseurEfface">
+            </div>
+        </div>
+
+        <div class="tableCouleur">
+            <div class="card">
+                <div class ="parametreOutil">
+                    <p class="parametreOutilTexte">Couleur</p> 
+                    <app-choisir-couleur></app-choisir-couleur>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+<body [ngStyle]="{'background-color': '#FFFFFF'}" >
+    <div class="column_draw">   
+
+        <app-canvas-specialise 
+            [outilActif]="outilActif" [editText] = "editText"
+            [largeur]="largeur" [hauteur]="hauteur"  [couleur]="couleur"
+            [epaisseurEllipse]="epaisseurEllipse" [point]="point" [epaisseurCrayon]="epaisseurCrayon" 
+            [textureEtampe]="textureEtampe" [angleEtampe]="angleEtampe" [anglePlume]="anglePlume" [epaisseurPlume]="epaisseurPlume"
+            [facteurMiseAEchelle]="facteurMiseAEchelle" [epaisseurEfface]="epaisseurEfface" 
+            [diametreAerosol]="diametreAerosol" [emissionAerosol]="emissionAerosol" 
+            [remplissageEllipse]="remplissageEllipse" [contourEllipse]="contourEllipse"
+            [selection]="selection" 
+        > 
+        </app-canvas-specialise>
+   </div>
+
+

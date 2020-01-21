@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body{
+    margin: 0;
+}
+button:hover {
+    cursor: pointer;
+}
+input:hover {
+    cursor: pointer;
+}
+.bouton-option-actif {
+    background-color: black;
+    color: rgb(245, 245, 245);
+}
+.bouton-option-inactif {
+    color: rgb(0, 0, 0);
+}

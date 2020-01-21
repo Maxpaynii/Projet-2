@@ -1,0 +1,14 @@
+.etiquette-container {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.etiquette-container:hover{
+    background-color: #777;
+}

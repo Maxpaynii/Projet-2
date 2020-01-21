@@ -1,0 +1,31 @@
+<h1 mat-dialog-title> Nouvelle Image</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <p>Entre les valeurs (c'est en pixel)</p>
+        <mat-form-field>
+            <input type="text" matInput formControlName="hauteur" (keyup)="setBloque()">
+            <mat-error>
+                Veuillez entrer 3 a 4 chiffres seulement
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput formControlName="largeur" (keyup)="setBloque()" >
+            <mat-error>
+                Veuillez entrer 3  a 4 chiffres seulement
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <div class="color-wrapper">
+                <app-transparence-couleur [transparence]="transparence" (couleur)="couleur = $event"></app-transparence-couleur>
+                <app-table-couleur (couleur)="transparence=$event"></app-table-couleur>
+            </div>
+            <div class="color-div" [ngStyle]="{'background-color': couleur || 'white'}"></div>
+            <input type="text" matInput [ngModel]='couleur' formControlName="couleur">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="annulation()">Cancel</button>
+    <button [disabled]="!formGroup.valid" (click)="onSubmit()">OK</button>
+</div>

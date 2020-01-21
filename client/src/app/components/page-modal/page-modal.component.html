@@ -1,0 +1,74 @@
+<div class = "Modal" #pageModal>
+      <!--contenu de la page modale-->
+      <div class = "ContenuModal">
+          <h1>Bienvenue sur PolyDessin 11</h1>
+
+       <!--ouvrir et fermer le guide d'utilisation-->
+          <h3>cliquer ici pour accéder au guide d'utilisation</h3>
+          <button (click)="Ouvrirguide()">Guide d'utilisation</button>
+          <div class="guideUtilisation">
+
+            <!--contenu du guide d'utilisation-->
+            <div class = "contenuGuide" #contenuGuide>
+
+              <button (click)="Fermerguide()">Fermer</button>
+              
+              <h1> Guide d'utilisation de PolyDessin 11</h1>
+              <h3> Pour sélectionner un outil, cliquer sur l'icone de l'outil souhaité. Un menu contenant divers option pour l'outil sélectionné sera affiché.</h3>
+                   
+              <h5>Annuler-refaire</h5>
+              <p>Permet d'annuler ou de refaire une action faite.
+              Si une nouvelle action est faite, il est impossible de refaire une action annulée.</p>
+              
+              <h5>Sélection</h5>
+              <p>Cliquer ou cliquer-déposer pour sélectionner un groupe de tracés.
+              Une fois un ou des tracés sélectionnés, cliquer sur un des 8 carrés entourant la sélection pour la redimensionner.
+              Utiliser la molette de la souris pour changer l'orientation.</p>
+              
+              <h5>Presse-papier</h5>
+              <p>Permet de copier, couper, coller, dupliquer et supprimer une sélection</p>
+              
+              <h5>Grille</h5>
+              <p>Permet d'afficher une grille.
+              Si l'option de magnétisme est utilisé, les tracés seront attirés vers les lignes de la grille.</p>
+              
+              <h5>Crayon</h5>
+              <p>Maintenir un clic pour effectuer un tracé libre.</p>
+              
+              <h5>Plume</h5>
+              <p>Maintenir un clic pour tracer un tracé libre avec une épaisseur avec une orientation personalisée.
+              Utiliser la molette de la souris pour changer l'orientation.</p>
+              
+              <h5>Pipette</h5>
+              <p>Cliquer pour sélectionner la couleur d'un tracé. Un clic gauche sélectionne la couleur primaire, alors qu'un clic droit sélectionne la couleur secondaire.</p>
+              
+              <h5>Efface</h5>
+              <p>Cliquer sur un tracé pour l'enlever.</p>
+              
+              <h5>Ellipse</h5>
+              <p>Cliquer-déposer pour tracer une ellipse.
+              Maintenir la touche Alt enfoncée permet de tracer un cercle.</p>  
+              
+              <h5>Étampe</h5>
+              <p>Cliquer pour ajouter une étampe.
+              Utiliser la molette de la souris pour changer l'orientation.</p>
+              
+              <h5>Aérosol</h5>
+              <p>Maintenir un clic pour parsemer des points à l'endroit du curseur.</p>
+              
+              <h5>Applicateur de couleur</h5>
+              <p>Cliquer sur un tracé pour changer sa couleur.</p>
+              
+              <h5>Texte</h5>
+              <p>Cliquer pour créer une zone de texte.</p>
+              
+              <button (click)="Fermerguide()">Fermer</button>
+            </div>
+          </div>
+          <div>
+              <input type="checkbox" id="case" name="case" (mousedown)="fermetureComplete()">
+              <label for="case">Cocher ici pour ne plus avoir ce message</label>
+          </div>
+      <button (click)="FermerpageModale()">quitter</button>
+      </div>
+</div>

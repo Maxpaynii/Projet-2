@@ -1,0 +1,27 @@
+<div class="parametreOutil">
+    <p class="parametreOutilTexte">Taille de texte</p>
+    <p class="erreur-parametre" *ngIf="epaisseurPlume <= 0">Erreur: taille de texte nulle ou négative</p>       
+    <input type="number" [(ngModel)]="tailleText" required>
+    <button (click)="appliquer()">appliquer</button>
+</div>
+
+<div class="parametreOutil">
+    <p class="parametreOutilTexte">Police de caractère</p>
+        <button [ngClass]="outilText.police.value === 'Times New Roman' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="changerPolice('Times New Roman')" style="font-family: 'Times New Roman'">Times New Roman</button>
+        <button [ngClass]="outilText.police.value === 'Calibri' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="changerPolice('Calibri')" style="font-family: 'Calibri'">Calibri</button>
+        <button [ngClass]="outilText.police.value === 'Ink Free' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="changerPolice('Ink Free')" style="font-family: 'Ink Free'">Ink Free</button>
+        <button [ngClass]="outilText.police.value === 'Comic Sans MS' ? 'bouton-option-actif' : 'bouton-option-inactif'"(click)="changerPolice('Comic Sans MS')" style="font-family: 'Comic Sans MS'">Comic Sans MS</button>
+</div>
+<div class="parametreOutil">
+    <p class="parametreOutilTexte">Option de texte</p>
+    <button [ngClass]="outilText.italic.value === 'italic' ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="MetrreItalic()" style="font-style: italic">Italique</button>
+    <button [ngClass]="outilText.gras.value === 'bold' ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="MettreGras()" style="font-weight: bold">gras</button>
+</div>
+<div class="parametreOutil">
+    <p class="parametreOutilTexte">Allignement de texte</p>
+    <button [ngClass]="outilText.alignement.value === 'start' ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="alignerText('start')" style="padding-left: 0px">gauche</button>
+    <button [ngClass]="outilText.alignement.value === 'middle' ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="alignerText('middle')">centrer</button>
+    <button [ngClass]="outilText.alignement.value === 'end' ? 'bouton-option-actif' : 'bouton-option-inactif'" (click)="alignerText('end')" style="padding-right: 0px">droite</button>
+</div>
+
+

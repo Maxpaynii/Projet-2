@@ -1,0 +1,33 @@
+<h1 mat-dialog-title> Sauvegarde</h1>
+<p>Veuillez selectionner les etiquettes que vous voulez associer a l'Image</p>
+<div class="etiquette-container" *ngFor="let etiquette of etiquettes" (click)="setEtiquetteSelectionne(etiquette)">
+    {{etiquette}}
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <p>Entre le titre de l'image</p>
+        <mat-form-field>
+            <input type="text" matInput formControlName="titre" (keyup)="setTitrePresent">
+            <mat-error>
+                Veuilez rentre un texte
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <p>Entrer une seule nouvelle etiquette</p>
+            <input type="text" matInput formControlName="etiquetteSimple" (keyup)="setPasEtiquetteSimple()">
+            <mat-error>
+                Veuillez rentrer seulement des caracteres alphanumeriques
+            </mat-error>
+        </mat-form-field>
+        <p>Voici les etiquettes que vous avez selectionnees</p>
+        <div *ngFor="let etiquetteSelectionne of etiquettesSelectionnees">
+            {{etiquetteSelectionne}}
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="annulation()">Cancel</button>
+    <button [disabled]="!formGroup.valid"  (click)="onSubmit()">Serveur</button>
+    <a [href]="fileUrl" download="{{formGroup.value.titre}}.svg"><button [disabled]="!formGroup.valid" (click)="onSubmitLocal()">Local</button></a>
+</div>
